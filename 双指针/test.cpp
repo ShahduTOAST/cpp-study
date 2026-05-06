@@ -10,7 +10,7 @@ void RemoveZero() {
     public:
         void moveZeroes(vector<int>* nums) {
             for (int cur = 0, dest = -1; cur < nums->size(); cur++) {
-                if ((*nums)[cur]) {//´¦Àí²»ÎªÁã
+                if ((*nums)[cur]) {//å¤„ç†ä¸ä¸ºé›¶
                     swap(nums[cur], nums[++dest]);
                 }
             }
@@ -24,23 +24,23 @@ void DuplicateZero() {
     public:
         void duplicateZeros(vector<int>& arr) {
             int cur = 0, dest = -1, n = arr.size();
-            //ÕÒ½áÊøÎ»ÖÃ,Ã»0¶¼×ß1£¬ÓĞ0dest¶à×ß1
+            //æ‰¾ç»“æŸä½ç½®,æ²¡0éƒ½èµ°1ï¼Œæœ‰0destå¤šèµ°1
             while (cur < n) {
                 if (arr[cur]) {
                     dest++;
                 }
                 else{
-                    cur += 2;
+                    dest += 2;
                 }
                 if (dest >= n - 1) break;
                 cur++;
             }
-            //´¦ÀíÌØÊâÇé¿ö.destÔ½½ç
+            //å¤„ç†ç‰¹æ®Šæƒ…å†µ.destè¶Šç•Œ
             if (dest == n) {
                 arr[n - 1] = 0;
                 cur--; dest -= 2;
             }
-            //·µ»Ø¸´Ğ´£¬Óöµ½ÁãĞ´Á½´Î£¬ÆäËûÖ±½Ó¸²¸Ç
+            //è¿”å›å¤å†™ï¼Œé‡åˆ°é›¶å†™ä¸¤æ¬¡ï¼Œå…¶ä»–ç›´æ¥è¦†ç›–
             while (cur >= 0) {
                 if (arr[cur]) arr[dest--] = arr[cur--];
                 else {
