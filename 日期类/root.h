@@ -9,7 +9,7 @@ public:
 		_month(month),
 		_day(day) {
 		if (year<0 || month < 1 || month>12 || day>GetMonthDay(year, month) || day < 0) {
-			cout << "ÈÕÆÚ·Ç·¨" << endl;
+			cout << "æ—¥æœŸéæ³•" << endl;
 			exit(1);
 		}
 	}
@@ -20,14 +20,14 @@ public:
 		_day(A._day) {}
 
 	~Date() {
-		//°´ĞèĞ´
+		//æŒ‰éœ€å†™
 	}
 
 	int GetMonthDay(int year, int month);
 	void print() {
-		cout << _year << "Äê" << _month << "ÔÂ" << _day << "ÈÕ" << endl;
+		cout << _year << "å¹´" << _month << "æœˆ" << _day << "æ—¥" << endl;
 	}
-	Date& operator +=(int day);//+=ÖØÔØ
+	Date& operator +=(int day);//+=é‡è½½
 	Date operator +(int day);
 	Date& operator -=(int day);
 	Date operator -(int day);
@@ -37,22 +37,36 @@ public:
 	Date operator++(int);
 	Date& operator--();
 	Date operator--(int);
-	// >ÔËËã·ûÖØÔØ
+	// >è¿ç®—ç¬¦é‡è½½
 	bool operator>(const Date& d);
-	// ==ÔËËã·ûÖØÔØ
+	// ==è¿ç®—ç¬¦é‡è½½
 	bool operator==(const Date& d);
-	// >=ÔËËã·ûÖØÔØ
+	// >=è¿ç®—ç¬¦é‡è½½
 	bool operator >= (const Date& d);
-	// <ÔËËã·ûÖØÔØ
+	// <è¿ç®—ç¬¦é‡è½½
 	bool operator < (const Date& d);
-	// <=ÔËËã·ûÖØÔØ
+	// <=è¿ç®—ç¬¦é‡è½½
 	bool operator <= (const Date& d);
-	// !=ÔËËã·ûÖØÔØ
+	// !=è¿ç®—ç¬¦é‡è½½
 	bool operator != (const Date& d);
-	// ÈÕÆÚ-ÈÕÆÚ ·µ»ØÌìÊı
+	// æ—¥æœŸ-æ—¥æœŸ è¿”å›å¤©æ•°
 	int operator-(const Date& d);
+	//é‡è½½<<
+	friend ostream& operator<<(ostream& out, const Date& d);
+	friend istream& operator>>(istream& in, Date& d);
 private:
 	int _year;
 	int _month;
 	int _day;
 };
+//å†…è”
+inline ostream& operator<<(ostream& out, const Date& d) {
+	out << d._year << "å¹´" << d._month << "æœˆ" << d._day << "æ—¥" << endl;
+	return out;
+}
+
+inline istream& operator>>(istream& in, Date& d) {
+	cout << "è¯·è¾“å…¥æ—¥æœŸ";
+	in >> d._year >> d._month >> d._day;
+	return in;
+}
