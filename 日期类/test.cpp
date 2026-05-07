@@ -28,7 +28,15 @@ void test01() {
 	cout << day << endl;
 }
 
+void test02() {
+	Date d1(2016, 5, 26);
+	Date d2;
+	cin >> d2;
+	cout << d1 << d2 << endl;
+}
+
 int main() {
 	test01();
+	test02();
 	return 0;
 }
