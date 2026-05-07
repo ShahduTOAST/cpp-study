@@ -3,7 +3,7 @@
 
 int Date::GetMonthDay(int year, int month) {
 	static int day[13] = { -1, 31,28,31,30,31, 30,31,31,30,31,30,31 };
-	//ÈòÄê
+	//é—°å¹´
 	if ((month == 2) && ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))) {
 		return 29;
 	}
@@ -115,7 +115,7 @@ Date Date::operator--(int) {
 	*this -= 1;
 	return tmp;
 }
-// >ÔËËã·ûÖØÔØ
+// >è¿ç®—ç¬¦é‡è½½
 bool Date::operator>(const Date& d) {
 	if (_year > d._year) {
 		return true;
@@ -128,30 +128,30 @@ bool Date::operator>(const Date& d) {
 	}
 	return false;
 }
-// ==ÔËËã·ûÖØÔØ
+// ==è¿ç®—ç¬¦é‡è½½
 bool Date::operator==(const Date& d) {
 	if (_year == d._year && _month == d._month && _day == d._day) {
 		return true;
 	}
 	return false;
 }
-// >=ÔËËã·ûÖØÔØ
+// >=è¿ç®—ç¬¦é‡è½½
 bool Date::operator >= (const Date& d) {
 	return ((*this) > d) || *this == d;
 }
-// <ÔËËã·ûÖØÔØ
+// <è¿ç®—ç¬¦é‡è½½
 bool Date::operator < (const Date& d) {
 	return !(*this >= d);
 }
-// <=ÔËËã·ûÖØÔØ
+// <=è¿ç®—ç¬¦é‡è½½
 bool Date::operator <= (const Date& d) {
 	return !(*this > d);
 }
-// !=ÔËËã·ûÖØÔØ
+// !=è¿ç®—ç¬¦é‡è½½
 bool Date::operator != (const Date& d) {
 	return !(*this == d);
 }
-// ÈÕÆÚ-ÈÕÆÚ ·µ»ØÌìÊı
+// æ—¥æœŸ-æ—¥æœŸ è¿”å›å¤©æ•°
 int Date::operator-(const Date& d) {
 	Date max(*this), min(d);
 	int day = 0, flag = 1;
@@ -166,3 +166,8 @@ int Date::operator-(const Date& d) {
 	}
 	return day * flag;
 }
+//å£°æ˜ä¸å®šä¹‰åˆ†ç¦»
+//ostream& operator<<(ostream& out, const Date& d) {
+//	out << d._year << "å¹´" << d._month << "æœˆ" << d._day << "æ—¥" << endl;
+//	return out;
+//}
