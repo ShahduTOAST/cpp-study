@@ -6,18 +6,18 @@ using namespace std;
 
 namespace MaxContinue1 {
 	//https://leetcode.cn/problems/max-consecutive-ones-iii/
-    //Õâ¸öÏÈËµ±©Á¦Ë¼Â·£¬¾ÍÊÇĞèÒª¸öcountÍ³¼Æ0³öÏÖ´ÎÊı
-    // Ê×ÏÈrightÌ½Â·£¬Åöµ½1Ã»ÊÂ£¬0 ++count¼ÌĞø×ß
-    // È»ºóÅĞ¶ÏÕâ¸ö´®ÊÇ·ñºÏ·¨£¬²»ºÏ·¨¾ÍÈÃleft++³ö´®Ö±µ½ºÏ·¨
+    //è¿™ä¸ªå…ˆè¯´æš´åŠ›æ€è·¯ï¼Œå°±æ˜¯éœ€è¦ä¸ªcountç»Ÿè®¡0å‡ºç°æ¬¡æ•°
+    // é¦–å…ˆrightæ¢è·¯ï¼Œç¢°åˆ°1æ²¡äº‹ï¼Œ0 ++countç»§ç»­èµ°
+    // ç„¶ååˆ¤æ–­è¿™ä¸ªä¸²æ˜¯å¦åˆæ³•ï¼Œä¸åˆæ³•å°±è®©left++å‡ºä¸²ç›´åˆ°åˆæ³•
     int longestOnes(vector<int>& nums, int k) {
         int count = 0, left = 0, right = 0, n = nums.size(), len = 0;
         for (right = 0; right < n; right++) {
-            //len = max(len,right - left);  //ÕâÀï²»ÄÜÕâÑùÊÇ{0£¬0£¬1} k = 2ÓĞbug¡£
+            //len = max(len,right - left);  //è¿™é‡Œä¸èƒ½è¿™æ ·æ˜¯{0ï¼Œ0ï¼Œ1} k = 2æœ‰bugã€‚
             if (!nums[right]) count++;
-            while (count > k) {//²»ºÏ·¨³ö´®Ö±µ½ºÏ·¨
+            while (count > k) {//ä¸åˆæ³•å‡ºä¸²ç›´åˆ°åˆæ³•
                 if (nums[left++] == 0) count--;
             }
-            len = max(len, right - left + 1);//+1ÊÇÈ«±Õ£¬Òª¼Ó1
+            len = max(len, right - left + 1);//+1æ˜¯å…¨é—­ï¼Œè¦åŠ 1
         }
         return len;
     }
@@ -25,14 +25,15 @@ namespace MaxContinue1 {
 
 namespace MinOperateXTo0 {
 	//https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/description/
-    //Ã÷Ìì²¹Ë¼Â·£¬Ì«À§ÁË
+    //æ€è·¯æ˜¯è¿™æ ·ï¼Œç”±äºæ­£ç€æ¥çš„è¯ä»–è¦ä¸¤ä¸ªç‰‡æ®µæœ€å°ï¼Œæˆ‘ä»¬éœ€è¦åŒæ—¶å¤„ç†ä¸¤ä¸ªç‰‡æ®µï¼Œè€Œä¸”è¦æ±‚åŒæ­¥ï¼Œæ—¶é—´å¤æ‚åº¦æ˜¯N^2
+	//æ­¤æ—¶æŠŠé—®é¢˜è½¬æ¢ä¸€ä¸‹ä¹Ÿå°±æ˜¯ä¸­é—´è¿ç»­ç‰‡æ®µæœ€é•¿çš„å’Œä¸ºsum - xï¼ˆä»–è¦æ±‚ä¸¤è¾¹å’Œä¸ºxï¼‰
     int minOperations(vector<int>& nums, int x) {
         int sum = 0;
         for (int a : nums) sum += a;
         int targe = sum - x;
         int ret = -1;
-
-        if (targe < 0) return -1;
+        if (targe < 0) return -1;//å¤„ç†ç‰¹æ®Šæƒ…å†µ
+		
         for (int left = 0, right = 0, tmp = 0; right < nums.size(); right++) {
             tmp += nums[right];
             while (tmp > targe) {
