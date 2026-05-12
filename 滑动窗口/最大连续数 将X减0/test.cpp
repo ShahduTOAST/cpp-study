@@ -40,8 +40,8 @@ namespace MinOperateXTo0 {
                 tmp -= nums[left++];
             }
             if (tmp == targe)
-                ret = max(ret, right - left + 1);
+                ret = max(ret, right - left + 1);//更新
         }
-        return ret == -1 ? -1 : nums.size() - ret;
+        return ret == -1 ? -1 : nums.size() - ret//处理-1
     }
 }
