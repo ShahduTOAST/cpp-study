@@ -1,0 +1,45 @@
+void IntroSort(int* a, int left, int right, int depth, int defaultdepth){
+// 数组长度小于16的小数组，换为插入排序，简单递归次数
+  if(right - left + 1 < 16)
+  {
+      InsertSort(a+left, right-left+1);
+      return;
+  }
+
+// 当深度超过2*logN，则改用堆排序
+  if(depth > defaultDepth)
+  {
+      HeapSort(a+left, right-left+1);
+      return;
+  }
+  
+  depth++;
+  
+  int begin = left;
+  int end = right;
+
+// 随机选key
+  int randi = left + (rand() % (right-left));
+  Swap(&a[left], &a[rand]);
+  
+  int prev = left;
+  int cur = prev + 1;
+  
+  int keyi = left;
+  while (cur <= right)
+  {
+      if (a[cur] < a[keyi] && ++prev != cur)
+      {
+        Swap(&a[prev], &a[cur]);
+      }
+
+      ++cur;
+  }
+
+  Swap(&a[prev], &a[keyi]);
+  keyi = prev;
+
+// [begin, keyi-1] keyi [keyi+1, end]
+  IntrSort(a, begin, keyi - 1, depth, defaultDepth);
+  IntrSort(a, keyi+1, end, depth, defaultDepth);
+}
