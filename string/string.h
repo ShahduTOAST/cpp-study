@@ -11,7 +11,7 @@ using std::strlen;
 namespace st {
 	class string {
 	public:
-		//ÕâÀïÊÇcppÌØÊâ´¦Àí£¬Ö»ÓĞstatic const¿ÉÒÔÕâÑù(ÒÉËÆÖ»ÄÜÓÃ¸øÕûĞÎ£¬ÏÖÔÚ¸¡µãÉ¶µÄºÃÏñ¶¼¿ÉÒÔÁË)
+		//è¿™é‡Œæ˜¯cppç‰¹æ®Šå¤„ç†ï¼Œåªæœ‰static constå¯ä»¥è¿™æ ·(ç–‘ä¼¼åªèƒ½ç”¨ç»™æ•´å½¢ï¼Œç°åœ¨æµ®ç‚¹å•¥çš„å¥½åƒéƒ½å¯ä»¥äº†)
 		static const size_t npos = -1;
 		typedef char* iterator;
 		typedef const char* const_iterator;
@@ -19,22 +19,31 @@ namespace st {
 		friend ostream& operator<<(ostream& out, const string& str);
 		/*string() :
 			_size(0),
-			_capacity(0) {//ÏÈ×ß³õÊ¼»¯ÔÙ×ßº¯Êı£¬ËùÒÔnew·ÅºóÃæ
-			_str = new char[1] {""};//ÕâÀï¸ø¿Õ´®Ö±½Ó¾ÍÊÇ/0
-		}*///ÏÂÃæÓĞ¶şºÏÒ»µÄ
+			_capacity(0) {//å…ˆèµ°åˆå§‹åŒ–å†èµ°å‡½æ•°ï¼Œæ‰€ä»¥newæ”¾åé¢
+			_str = new char[1] {""};//è¿™é‡Œç»™ç©ºä¸²ç›´æ¥å°±æ˜¯/0
+		}*///ä¸‹é¢æœ‰äºŒåˆä¸€çš„
 
-		string(const char* str = "") ://ÕâÀï×¢Òâ±ğÓÃ»ìÁË
+		string(const char* str = "") ://è¿™é‡Œæ³¨æ„åˆ«ç”¨æ··äº†
 			_size(strlen(str)) {
 			_capacity = _size;
-			_str = new char[_size + 1];//´æ´¢¶à¸ö/0
-			memcpy(_str, str, _size + 1);///0Ò²Òª´«£¬²»È»Ã»½áÊø±êÖ¾
+			_str = new char[_size + 1];//å­˜å‚¨å¤šä¸ª/0
+			memcpy(_str, str, _size + 1);///0ä¹Ÿè¦ä¼ ï¼Œä¸ç„¶æ²¡ç»“æŸæ ‡å¿—
 		}
 
-		string(const string& str) :
+		/*string(const string& str) :
 			_size(str._size),
 			_capacity(str._capacity) {
 			_str = new char[_size + 1];
-			memcpy(_str, str._str, _size + 1);//ÕâÀïÊÇµÚ¶ş¸öÔªËØ²»ÊÇchar*£¬ÆäËû½â¾ö·½·¨ 1.¸´ÓÃ=£¬2.ÓÃº¯Êı»ñÈ¡µØÖ·
+			memcpy(_str, str._str, _size + 1);//è¿™é‡Œæ˜¯ç¬¬äºŒä¸ªå…ƒç´ ä¸æ˜¯char*ï¼Œå…¶ä»–è§£å†³æ–¹æ³• 1.å¤ç”¨=ï¼Œ2.ç”¨å‡½æ•°è·å–åœ°å€
+		}*/
+		//è¿™ä¸ªæ˜¯ç°ä»£å†™æ³•,ä½†æ˜¯è¿™å¼ ä¸ä¿é™©ï¼Œä¾‹å¦‚hello '\0'worldï¼Œä»–åˆ°ç¬¬ä¸€ä¸ª'0'å°±åœäº†
+		/*string( string tmp) :
+			swap(tmp);
+			
+		}*/
+		string(const string& a){
+			string tmp(a.begin(), a.end());
+			swap(tmp);
 		}
 		string& operator=(const string& s);
 
@@ -49,9 +58,9 @@ namespace st {
 		const char& operator[](size_t i)const;
 		// iterator
 		iterator begin();
-			//ÕâÀïÒª×¢ÒâÒ»ÏÂ£¬constÉ¶²»ÄÜĞŞ¸Ä£¬ÊÇµü´úÆ÷±¾Éí²»ÄÜĞŞ¸Ä
-			//const iterator begin()const;´íÎóÑùÀı
-			//»¹ÓĞ¸öºÃÍæµÄ£¬¾ÍÊÇconst»áÔ½¹ıtypedef
+			//è¿™é‡Œè¦æ³¨æ„ä¸€ä¸‹ï¼Œconstå•¥ä¸èƒ½ä¿®æ”¹ï¼Œæ˜¯è¿­ä»£å™¨æœ¬èº«ä¸èƒ½ä¿®æ”¹
+			//const iterator begin()const;é”™è¯¯æ ·ä¾‹
+			//è¿˜æœ‰ä¸ªå¥½ç©çš„ï¼Œå°±æ˜¯constä¼šè¶Šè¿‡typedef
 		const_iterator begin()const;
 		iterator end();
 		const_iterator end()const;
@@ -63,7 +72,7 @@ namespace st {
 		string& operator+=(const char* str);
 		void clear();
 		void swap(string& s);
-		const char* c_str()const {//ÕâÀïÓĞ¸öÖªÊ¶µã£¬const¶ÔÏóÖ»ÄÜÓÃconstº¯Êı
+		const char* c_str()const {//è¿™é‡Œæœ‰ä¸ªçŸ¥è¯†ç‚¹ï¼Œconstå¯¹è±¡åªèƒ½ç”¨constå‡½æ•°
 			return _str;
 		}
 
@@ -73,10 +82,10 @@ namespace st {
 		bool empty()const;
 		void resize(size_t n, char c = '\0');
 		void reserve(size_t n);
-		// ÔÚposÎ»ÖÃÉÏ²åÈë×Ö·ûc/×Ö·û´®str£¬²¢·µ»Ø¸Ã×Ö·ûµÄÎ»ÖÃ
+		// åœ¨posä½ç½®ä¸Šæ’å…¥å­—ç¬¦c/å­—ç¬¦ä¸²strï¼Œå¹¶è¿”å›è¯¥å­—ç¬¦çš„ä½ç½®
 		string& insert(size_t pos, char c);
 		string& insert(size_t pos, const char* str);
-		// É¾³ıposÎ»ÖÃÉÏµÄÔªËØ£¬²¢·µ»Ø¸ÃÔªËØµÄÏÂÒ»¸öÎ»ÖÃ
+		// åˆ é™¤posä½ç½®ä¸Šçš„å…ƒç´ ï¼Œå¹¶è¿”å›è¯¥å…ƒç´ çš„ä¸‹ä¸€ä¸ªä½ç½®
 		string& erase(size_t pos, size_t len = npos);
 		//relational operators
 		bool operator<(const string& s);
@@ -86,10 +95,10 @@ namespace st {
 		bool operator==(const string& s);
 		bool operator!=(const string& s);
 
-		// ·µ»ØcÔÚstringÖĞµÚÒ»´Î³öÏÖµÄÎ»ÖÃ
+		// è¿”å›cåœ¨stringä¸­ç¬¬ä¸€æ¬¡å‡ºç°çš„ä½ç½®
 		size_t find(char c, size_t pos = 0) const;
 
-		// ·µ»Ø×Ó´®sÔÚstringÖĞµÚÒ»´Î³öÏÖµÄÎ»ÖÃ
+		// è¿”å›å­ä¸²såœ¨stringä¸­ç¬¬ä¸€æ¬¡å‡ºç°çš„ä½ç½®
 		size_t find(const char* s, size_t pos = 0) const;
 
 	private:
