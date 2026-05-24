@@ -1,7 +1,7 @@
 namespace Friut {
     //https://leetcode.cn/problems/fruit-into-baskets/
     //这个暴力思路，定义左右，然后开始统计水果种类数，然后合法right++，不合法出哈希left--；
-    //主要是还没学哈希（哈希就是计数的）
+    //主要是还没学哈希（哈希就是计数的）。
     int totalFruit(vector<int>& f) {
         unordered_map<int, int> hash;//统计水果种类
         int ret = 0;
