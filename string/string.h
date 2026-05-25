@@ -22,7 +22,13 @@ namespace st {
 			_capacity(0) {//先走初始化再走函数，所以new放后面
 			_str = new char[1] {""};//这里给空串直接就是/0
 		}*///下面有二合一的
-
+		template<class InputIterator>
+		string(InputIterator begin,InputIterator end){
+			while(begin != end){
+				push_back(*begin);
+				++begin;
+			}
+		}
 		string(const char* str = "") ://这里注意别用混了
 			_size(strlen(str)) {
 			_capacity = _size;
