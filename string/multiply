@@ -91,3 +91,57 @@ public:
   }
 
 };
+//这个是我自己一开始写的，复用用的相加
+/*class Solution {
+    string addStrings(string num1, string num2) {
+        string str;
+        int pos = 0,next = 0;
+        int n1 = num1.size() - 1, n2 = num2.size() - 1;
+        while(n1 >= 0 || n2 >= 0){
+            int nu1 = n1>=0 ? num1[n1] - '0' : 0;
+            int nu2 = n2>=0 ? num2[n2] - '0' : 0;
+            pos = nu1 + nu2 + next;
+            next = pos/10;
+            pos %= 10;
+            str.insert(str.begin(), '0' + pos);
+            --n1,--n2;
+        }
+        if(next)
+            str.insert(str.begin(), '0' + next);
+        return str;
+    }
+public:
+    string multiply(string num1, string num2) {
+        if(num1 == "0" || num2 == "0") return "0";
+        string str;
+        int n1 = num1.size()-1;
+        while(n1 >= 0 ){
+            string tmp;
+            int count = num1.size() - 1 -n1;
+            //确定位数，例如10*，100*
+            while(count-- > 0){
+                tmp.insert(tmp.begin(),'0');
+            }
+            int nu1 = n1>=0 ? num1[n1] - '0' : 0;
+            int pos = 0, next = 0;
+            for(int n2 = num2.size() - 1; n2 >= 0; n2--){//模拟一个位*另一个串
+                int nu2 = n2>=0 ? num2[n2] - '0' : 0;
+                //cout<<nu1<<' '<< nu2<<' '<<next<<endl;
+                pos = nu1 * nu2 + next;
+                //cout<<pos<<endl;
+                next = pos / 10;
+                pos%=10;
+                tmp.insert(tmp.begin(),'0' + pos);
+                //cout<<tmp<<endl;
+            }
+            if(next)
+                tmp.insert(tmp.begin(), '0' + next);
+                //cout<<tmp<<endl;
+                //cout<<str<<endl;
+            str = addStrings(str,tmp);//两个相加,
+            n1--;
+        }
+        //str.erase(str.end()-1);
+        return str;
+    }
+};*/
