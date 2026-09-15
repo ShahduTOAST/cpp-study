@@ -1,0 +1,23 @@
+//https://www.nowcoder.com/practice/e8a1b01a2df14cb2b228b30ee6a92163?tpId=13&&tqId=11181&rp=1&ru=/activity/oj&qru=/ta/coding-interviews/question-ranking
+int MoreThanHalfNum_Solution(vector<int>& numbers) {
+        //这个是排序解法，也就是众数太多了，排序后肯定覆盖中间范围
+        // sort(numbers.begin(),numbers.end());
+        // return numbers[numbers.size()/2];
+  
+        //候选人解法？我想叫计数，不过这里的对象是取当前最优(即出现次数最多的)
+        //原理就是众数足够多，够造，就算一比一消去也会丢下一个众数
+        int cond = -1, count =0;//cond为当前优势数字
+        for(int i = 0; i < numbers.size(); ++i){
+            if(count == 0){//没有优势数字，选取
+            cond = numbers[i];
+            ++count;
+            }else{
+                if(cond == numbers[i]) ++count;
+                else --count;
+            }
+        }
+        if(count>0){
+            return cond;
+        }
+        return -1;//错误码
+    }
