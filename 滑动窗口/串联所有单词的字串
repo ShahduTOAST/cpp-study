@@ -1,0 +1,34 @@
+//https://leetcode.cn/problems/substring-with-concatenation-of-all-words/description/
+
+vector<int> findSubstring(string s, vector<string>& words) {
+        //我的思路的话，首先是滑动窗口，但是一次滑动长度是单词长度，然后用count标记合法单词数
+        //size（size是总长度，即单词数量*单词长度）大于总长度就出，如果符合要求就直接返回
+
+        //这里还有就是从0匹配，1然后依次到单词长度次（错位）
+        vector<int> ret;
+        unordered_map<string,int> hash1;//words里的单词出现次数
+        for(auto& e : words) ++hash1[e];
+
+        int len = words[0].size(), size = words.size();
+
+        for(int i = 0;i<len;++i){//滑动窗口执行次数
+            unordered_map<string,int> hash2;//实际出现次数,hash2必须在这里更新,否则会影响下一次结果
+            for(int left = i, right = i, count = 0; right + len <= s.size(); right += len){
+                //进窗口+维护count
+                string in = s.substr(right, len);
+                if(hash1.count(in) && hash2[in]++ < hash1[in]) count++;
+                //判断+更新结果?
+                //出窗口+维护count；
+                if(right - left + 1 > len*size){
+                    string out = s.substr(left,len);
+                    if(hash1.count(out) && hash2[out]-- <= hash1[out]) count--;
+                    left+=len;
+                }
+                //更新结果
+                if(count == size)  ret.push_back(left);
+                 
+            }
+        }
+        return ret;
+
+    }
