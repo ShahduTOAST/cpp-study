@@ -1,0 +1,34 @@
+//https://leetcode.cn/problems/minimum-window-substring/
+
+string minWindow(string s, string t) {
+        //还是滑动窗口，思路就是依然统计有效个数，最后看是否hash2里的元素出现次数均大于1里的，如果满足就count（满足的种类数）++
+        //然后标记更新，中间先存储位置pos与长度minlen，后续有更小的就继续更细
+        int hash1[128] = { 0 };
+        int kinds = 0;//统计实际有效字符个数
+        for(auto& e:t) {//取目标结果
+            if(hash1[e]++ == 0) kinds++;
+        }
+        int hash2[128] = { 0 };
+        int pos = -1, minlen = INT_MAX, count = 0;
+        
+        for(int left = 0, right = 0;right < s.size(); right++){
+            //入，维护hash2
+            char in = s[right]; 
+            if(++hash2[in] == hash1[in]) count++;
+            //出，维护hash2
+            char out = s[left];
+            while(hash2[out]-1 >= hash1[out]){
+                hash2[out]--;
+                out = s[++left];
+            }
+            //判断更新结果
+            if(count == kinds) {
+                if(right - left +1 < minlen){
+                    minlen = right - left+ 1;
+                    pos = left;
+                }
+            }
+        }
+        if(pos == -1) return ""; 
+        return s.substr(pos, minlen);
+    }
