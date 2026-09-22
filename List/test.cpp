@@ -52,6 +52,38 @@ namespace shahdu{
 		}
 		cout << lt2.size() << "\t";
 	}
+
+	//void test_list4()
+	//{
+	//	//AA aa1 = { 1,1 };
+	//	std::vector<AA> v1;
+	//	v1.push_back({ 1,1 });
+	//	v1.push_back({ 2,2 });
+	//	v1.push_back({ 3,3 });
+	//	vector<AA>::iterator it1 = v1.begin();
+	//	while (it1 != v1.end())
+	//	{
+	//		cout << it1->_a1 << ":" << it1->_a2 << endl;
+	//		++it1;
+	//	}
+	//	cout << endl;
+	
+	//	list<AA> lt1;
+	//	lt1.push_back({ 1,1 });
+	//	lt1.push_back({ 2,2 });
+	//	lt1.push_back({ 3,3 });
+	//	list<AA>::iterator lit1 = lt1.begin();
+	//	while (lit1 != lt1.end())
+	//	{
+	//		//cout << (*lit1)._a1 <<":"<< (*lit1)._a2 << endl;
+	//		// 特殊处理，省略了一个->,为了可读性
+	//		cout << lit1->_a1 << ":" << lit1->_a2 << endl;
+	//		cout << lit1.operator->()->_a1 << ":" << lit1.operator->()->_a2 << endl;
+	
+	//		++lit1;
+	//	}
+	//	cout << endl;
+	//}
 }
 
 int main() {
