@@ -14,10 +14,10 @@ namespace shahdu {
 		_data(x) {}
 	};
 
-	template<class T, class Ref>
-	struct list_iterator {//ÖØÔØ½Úµã	
+	template<class T, class Ref, class Ptr>
+	struct list_iterator {//é‡è½½èŠ‚ç‚¹	
 		typedef list_node<T> Node;
-		typedef list_iterator<T, Ref> Self;//ÕâÀïµÄrefÊÇ·µ»ØÀàĞÍÊÇ·ñ¼Óconst£¬ÀıÈçconst int ºÍint
+		typedef list_iterator<T, Ref, Ptr> Self;//è¿™é‡Œçš„refæ˜¯è¿”å›ç±»å‹æ˜¯å¦åŠ constï¼Œä¾‹å¦‚const int å’Œint
 		Node* _node;
 
 		list_iterator(Node* node):
@@ -26,7 +26,7 @@ namespace shahdu {
 		Ref operator*() {
 			return _node->_data;
 		}
-		Ref& operator ->() {
+		Ptr operator ->() {
 			return &_node->_data;
 		}
 		Self& operator++() {
@@ -59,8 +59,8 @@ namespace shahdu {
 	class list {
 	public:
 		typedef list_node<T> Node;
-		typedef list_iterator<T, T&> iterator;//ÕâÀï²»ÄÜÈÃtypedefÇ°ºóÃû×ÖÏàÍ¬
-		typedef list_iterator<T, const T&> const_iterator;//ÕâÁ©ÆäÊµ¾ÍÊÇ¼õÉÙ¹¤×÷Á¿£¬ÈÃ±àÒëÆ÷×Ô¼ºÉú³É
+		typedef list_iterator<T, T&, T*> iterator;//è¿™é‡Œä¸èƒ½è®©typedefå‰ååå­—ç›¸åŒ
+		typedef list_iterator<T, const T&, const T*> const_iterator;//è¿™ä¿©å…¶å®å°±æ˜¯å‡å°‘å·¥ä½œé‡ï¼Œè®©ç¼–è¯‘å™¨è‡ªå·±ç”Ÿæˆ
 		void empty_init() {
 			_head = new Node;
 			_head->_next = _head;
@@ -82,13 +82,13 @@ namespace shahdu {
 				it = erase(it);
 			}
 		}
-		iterator begin() {//ÕâÀïµÃÇ¿×ª£¬²»ÊÇµü´úÆ÷ÀàĞÍ
+		iterator begin() {//è¿™é‡Œå¾—å¼ºè½¬ï¼Œä¸æ˜¯è¿­ä»£å™¨ç±»å‹
 			return iterator(_head->_next);
 		}
 		iterator end() {
 			return iterator(_head);
 		}
-		const_iterator begin() const{//ÕâÀïµÃÇ¿×ª£¬²»ÊÇµü´úÆ÷ÀàĞÍ
+		const_iterator begin() const{//è¿™é‡Œå¾—å¼ºè½¬ï¼Œä¸æ˜¯è¿­ä»£å™¨ç±»å‹
 			return const_iterator(_head->_next);
 		}
 		const_iterator end() const{
