@@ -3,8 +3,11 @@
 vector<int> findSubstring(string s, vector<string>& words) {
         //我的思路的话，首先是滑动窗口，但是一次滑动长度是单词长度，然后用count标记合法单词数
         //size（size是总长度，即单词数量*单词长度）大于总长度就出，如果符合要求就直接返回
-
+        
         //这里还有就是从0匹配，1然后依次到单词长度次（错位）
+
+        //补充一下思路，用到的容器，哈希表，整形和string做映射，然后我们这里用count标记合法单词个数（防止走hash.size()导致时间复杂度过高），如果是目标单词就++count，出的时候如果是目标就--count
+        //然后其他的不用管，他肯定是大于等于我目标哈希表内部的个数，不会影响count。
         vector<int> ret;
         unordered_map<string,int> hash1;//words里的单词出现次数
         for(auto& e : words) ++hash1[e];
