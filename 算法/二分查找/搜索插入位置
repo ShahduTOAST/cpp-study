@@ -1,5 +1,7 @@
 //https://leetcode.cn/problems/search-insert-position/
-
+//今天好累，咕了
+//写一下思路吧，和二分查找一样。
+//我们有个目标值target，如果我们的值小于他，就让x往后走，相反如果大与等于就不动（可能是目标值）.+-1暂时没搞明白，先睡觉去了
 
 
 int searchInsert(vector<int>& nums, int target) {
