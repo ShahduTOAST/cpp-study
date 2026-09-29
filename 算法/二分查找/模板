@@ -1,0 +1,11 @@
+//1.朴素版本模板
+
+/*while(left <= right){
+  int mid = left + (right - left)/2;
+  if(...)
+    left = mid + 1;
+  else if(...)
+    right = mid - 1;
+  else
+    return ...;
+}*/
