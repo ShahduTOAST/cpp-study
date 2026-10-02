@@ -9,3 +9,17 @@
   else
     return ...;
 }*/
+
+//2.区间模板
+//左端点
+while(left < right){
+  int mid = left + (right - left)/2;
+  if(...)left = mid + 1;
+  else right = mid;
+}
+//右端点
+while(left < right){
+  int mid = left + (right - left + 1)/2;
+  if(...)left = mid;
+  else right = mid + 1;
+}
