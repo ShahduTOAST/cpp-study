@@ -1,0 +1,29 @@
+//https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/
+    //整体思路：  二分查找，首先分两次，这里只讲左侧，右侧对称即可
+    //left位于<target区间（right>target）,right>=target(left<=target)
+    //然后开始走，对于左侧来说，目标值不在该区间内且最后要位于目标值，所以循环后要＋1后移，即left=mid+1（right=mid-1）
+    //对于右侧来说，目标值在区间内，所以不能越过区间，即right=mid（left=mid）
+    //然后是mid的选取，在偶数个且二者相邻情况下：左端点(right-left)和右端点(right-left+1)，这里如果选右端点的话会导致right无法左移，导致死循环，故选第一种（同理右端点为第二种）
+    //最后判断点位即可
+    vector<int> searchRange(vector<int>& nums, int target) {
+        if(nums.size() <= 0) return {-1, -1};//处理为空
+        int begin = 0, end = 0;
+        //查找左端点
+        int left = 0, right = nums.size() - 1;
+        while(left < right){
+            int mid = left + (right - left)/2;
+            if(nums[mid] < target) left = mid + 1;
+            else right = mid;
+        }
+        //判断是否有结果
+        if(nums[left] != target) return {-1, -1};//用{}
+        else begin = left;
+        //查找右端点
+        left = 0, right = nums.size() - 1;
+        while(left < right){
+            int mid = left + (right - left + 1)/2;
+            if(nums[mid] <= target) left = mid;
+            else right = mid - 1;
+        }
+        return {begin, right};
+    }
