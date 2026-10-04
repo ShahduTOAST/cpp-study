@@ -1,0 +1,19 @@
+//https://leetcode.cn/problems/peak-index-in-a-mountain-array/
+
+class Solution {
+public:
+    //思路的话，首先它有二段性，所以可以用二分
+    //在上升区间，我们判断之后取后一个值即mid
+    //下降区间我们要前一个即mid - 1，所以left，right分别更新对应值
+    //然后这里的情况是偶数上升会导致left无法正常更新（模板二死循环），所以要取右侧，即mid内部+1
+    int peakIndexInMountainArray(vector<int>& arr) {
+        //本身如果数组元素个数小于3的话会很难搞，但是题目限制住了，且一定有递减元素，所以担心的情况不会发生
+        int left = 0, right = arr.size() - 1;
+        while(left < right){
+            int mid = left + (right - left + 1)/2;
+            if(arr[mid] > arr[mid - 1]) left = mid;
+            else right = mid - 1;//这里不可能等于，所以不管
+        }
+        return left;
+    }
+};
