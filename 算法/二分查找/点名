@@ -5,10 +5,9 @@ public:
     int takeAttendance(vector<int>& records) {
         //这个的二段行是，在mid前都是n = arr[n],右侧n = arr[n] + 1
         //找到之后返回n即可
-        //特殊处理一下缺头和缺尾
+        //特殊处理一下缺尾
         int left = 0, right = records.size() - 1;
         if(records[right] == right) return right + 1;//处理缺尾
-        if(records[0] == 1) return 0;//处理缺头
 
         while(left < right){
             int mid = left + (right - left)/2;
