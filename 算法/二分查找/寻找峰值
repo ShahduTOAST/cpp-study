@@ -1,0 +1,21 @@
+//https://leetcode.cn/problems/find-peak-element/
+
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        //这个和山峰数组峰顶一个思路啊，用那个代码能直接ac
+        //这里做个简单优化，如果开头是下降，那0位置一定是峰值，同理如果右侧上升则最后一个满足
+        int left = 0, right = nums.size() - 1;
+        if(nums.size()>=2){
+            if(nums[0] > nums[1]) return 0;
+            if(nums[right] > nums[right - 1]) return right;
+        }
+        
+        while(left < right){
+            int mid = left + (right - left)/2;
+            if(nums[mid] > nums[mid + 1]) right = mid;//上升趋势找左侧，变右侧
+            else left = mid + 1;
+        }
+        return left;
+    }
+};
