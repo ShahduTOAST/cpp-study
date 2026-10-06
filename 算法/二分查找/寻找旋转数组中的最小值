@@ -1,0 +1,43 @@
+//https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/description/
+
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        //上面先不管，我们这里的二段行是这样的。c d a b,其中b一定小于c，所以哦我们以b为基准值，判断处于ab段还是cd段
+        int left = 0, right = nums.size() - 1;
+        int n = nums[right];
+        while(left < right){
+            int mid = left + (right - left)/2;
+            //处于左段
+            if(nums[mid] > n) left = mid + 1;
+            //处于右段
+            else right = mid;
+        }
+        return nums[left];
+    }
+};
+
+//错误思路，可以看着玩玩
+ // //还是经典的二分查找，如果n > n+1 ,即下降趋势，目标在右侧更新left到mid + 1
+        // //如果n < n+1 ，则上升目标在左侧，更新right到mid
+        // //这里右一个元素的数组，所以要判断
+        // int  left = 0, right = nums.size() - 1;
+        // while(left < right){
+        //     int mid = left + (right - left)/2;
+        //     if(nums[mid] > nums[mid + 1]) left = mid + 1;
+        //     else right = mid;
+        // }
+        // int min = left;
+
+        // left = 0, right = nums.size() - 1;
+        // while(left < right){
+        //     int mid = left + (right - left)/2;
+        //     if(nums[mid] > nums[mid + 1]) right = mid;
+        //     else left = mid + 1;
+        //     cout<< left << ' ' << right << endl;
+        // }
+        // int max = (left + 1) % nums.size();
+        // cout<< min << ' ' << max << endl;
+        // min = nums[min] < nums[max] ? nums[min] : nums[max];
+        // //return min;
+        // return min;
