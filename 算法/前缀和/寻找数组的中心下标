@@ -2,7 +2,8 @@
 
 class Solution {
 public:
-// 思路的话，勇气那坠河数组直接判断，时间复杂度是n
+// 思路的话，用前缀和数组直接判断，时间复杂度是n
+//判断方式为检测i之气那和i之后的和是否相同
     int pivotIndex(vector<int>& nums) {
         //求前缀和数组
         int n = nums.size();
