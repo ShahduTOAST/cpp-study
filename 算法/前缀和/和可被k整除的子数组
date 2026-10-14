@@ -1,0 +1,24 @@
+//https://leetcode.cn/problems/subarray-sums-divisible-by-k/description/
+//思路和和为k的类似，代码也是直接套用的
+//推理一下过程：首先（a-b）&k == 0  ==> a%k == b%k                  |<-------sum ------>| 
+//然后开始套用加法思路，在区间内 假设当前在i位置，前面i到p位置符合条件。0 ----- p --------- i
+//                                                                |<--x-->|
+//如上图，所以我们要求（sum-x）%k == 0，即 sum%k == x%k
+
+
+class Solution {
+public:
+    int subarraysDivByK(vector<int>& nums, int k) {
+        unordered_map<int,int> hash;
+        hash[0] = 1;//处理前缀和数组为k(返回头)
+
+        int sum = 0, ret = 0;
+        for(auto x: nums){
+            sum += x;//更新前缀和（数组省略了）
+            int r = (sum % k + k) % k;
+            if(hash.count(r)) ret += hash[r];//统计个数
+            hash[r]++;//
+            }
+        return ret;
+    }
+};
