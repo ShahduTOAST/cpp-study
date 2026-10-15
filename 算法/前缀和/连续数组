@@ -1,0 +1,22 @@
+//
+
+class Solution {
+public:
+    int findMaxLength(vector<int>& nums) {
+        int n = nums.size(); 
+        unordered_map<int,int> hash;
+        hash[0] = -1;
+        int len = 0, sum = 0;
+        for(int i = 0; i < n; i++){
+            /*for(int j = 0; j < i; j++){
+                int t =2 * (hash[i] - hash[j]); 
+                if(t == (i - j)) len = len > t ? len : t;
+            }*/
+            sum += nums[i];
+            int t = 2 * sum - (i + 1);
+            if(hash.count(t)) len = max(len, i - hash[t]);
+            else hash[t] = i;
+        }
+        return len;
+    }
+};
