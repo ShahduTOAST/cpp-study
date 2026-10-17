@@ -1,0 +1,27 @@
+//https://leetcode.cn/problems/matrix-block-sum/
+
+//思路和矩阵前缀和一样，多了边界处理，加上max，min函数就可以
+class Solution {
+public:
+    vector<vector<int>> matrixBlockSum(vector<vector<int>>& mat, int k) {
+        int m = mat.size(), n = mat[0].size();
+        //初始化前缀和数组
+        vector<vector<int>> dp(m + 1, vector<int>(n + 1));
+        for(int i = 1; i <= m; i++){
+            for(int j = 1; j <= n; j++){
+                dp[i][j] = dp[i][j - 1] +dp[i - 1][j] - dp[i - 1][j - 1] + mat[i - 1][j - 1];
+            }
+        }
+        //处理ret数组
+        vector<vector<int>> ret(m, vector<int>(n));
+        for(int i = 0; i < m; i++){
+        int x1 = 0, x2 = 0, y1 = 0, y2 = 0;//初始化xy，防止上一次值污染
+            for(int j = 0; j < n; j++){
+                x1 = max(0,i - k) + 1, x2 = min(m - 1, i + k) + 1;
+                y1 = max(0,j - k) + 1, y2 = min(n - 1, j + k) + 1;
+                ret[i][j] = dp[x2][y2] -dp[x1 - 1][y2] - dp[x2][y1 - 1] + dp[x1 - 1][y1 - 1];
+            }
+        }
+        return ret;
+    }
+};
