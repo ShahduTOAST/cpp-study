@@ -1,0 +1,19 @@
+//https://leetcode.cn/problems/is-unique-lcci/
+
+class Solution {
+public:
+    bool isUnique(string astr) {
+        //可以用位图来储存出现次数，代替哈希表
+        //首先有个优化，如果他大于26哥，绝对重复
+        int n = astr.size();
+        if(n > 26) return false; 
+        //从第i个比特位开始，如果存在就是1 ，否则就是0；
+        int bitMap = 0;
+        for(auto ch : astr){
+            int i = ch - 'a';
+            if((bitMap >> i) & 1) return false;
+            bitMap |= 1 << i;
+        }
+        return true;
+    }
+};
