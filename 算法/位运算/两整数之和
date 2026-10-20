@@ -1,0 +1,14 @@
+//https://leetcode.cn/problems/sum-of-two-integers/
+//思路就是，存进位然后加上去（^）
+
+class Solution {
+public:
+    int getSum(int a, int b) {
+        while(b){
+            unsigned int mid = (unsigned int)(a & b) << 1;
+            a = a ^ b;
+            b = mid;
+        }
+        return a;
+    }
+};
