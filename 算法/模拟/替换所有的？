@@ -1,5 +1,5 @@
 //https://leetcode.cn/problems/replace-all-s-to-avoid-consecutive-repeating-characters/
-//简单写一下思路 和这类题，这里题目主要就是模拟实现题目表达过程，靠代码能力
+//简单写一下思路 和这类题，这里题目主要就是模拟实现题目表达过程，考验代码能力
 
 
 class Solution {
