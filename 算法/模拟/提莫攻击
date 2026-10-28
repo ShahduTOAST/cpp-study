@@ -1,0 +1,16 @@
+//https://leetcode.cn/problems/teemo-attacking/
+
+class Solution {
+public:
+    int findPoisonedDuration(vector<int>& timeSeries, int duration) {
+        //我的思路是计算两个相邻元素差值，判断大小后做出选择+ 循环
+        int n = timeSeries.size(), ret = 0;
+
+        for(int i = 0; i < n - 1; i++){
+            int mid = timeSeries[i + 1] - timeSeries[i];
+            if(mid >= duration) ret += duration;
+            else ret += mid;
+        }
+        return ret + duration;
+    }
+};
